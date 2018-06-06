@@ -26,3 +26,6 @@
 hs_err_pid*
 #ignore .txt file
 *.txt
+
+#Local properties are not required to commit
+data/properties.xml
