@@ -17,9 +17,6 @@ import com.twitter.pages.TwitterHomePage;
 import com.twitter.pages.TwitterLoginPage;
 import com.twitter.pages.TwitterOptionsPage;
 import com.twitter.pages.TwitterResultsPage;
-import com.twitter.pages.WebPage;
-
-import helpers.Locators;
 import helpers.SpecificProperties;
 
 public class TwitterTestBasePOM {	
