@@ -44,7 +44,7 @@ public class TwitterHomePage extends WebPage {
 	
 	//Methods
 	
-	public void tweetSomething (String something) {;
+	public void tweetSomething (String something) {
 		tweetTxt = wait.until(ExpectedConditions.elementToBeClickable(tweetTxt));				
 		tweetTxt.sendKeys(something);		
 		tweetBtn.click();
@@ -54,8 +54,13 @@ public class TwitterHomePage extends WebPage {
 	public boolean isTweeted (String tweet) {	
 		driver.navigate().refresh();
 		driver.switchTo().alert().accept();
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(text(),'"+tweet+"')]")));
-		tweetsContainer = wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath(Locators.TWEETS_CONTAINER_XPATH)));
+		try {
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(text(),'"+tweet+"')]")));
+		} catch (Exception e) {
+			// TODO if wait fails, check for  "See one more tweet..." click it and retry
+		}
+		tweetsContainer = driver.findElements(By.xpath(Locators.TWEETS_CONTAINER_XPATH)); 
+				//wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath(Locators.TWEETS_CONTAINER_XPATH)));
 		
 		WebElement lastTweet = tweetsContainer.get(0);
 		String txt = lastTweet.findElement(By.xpath(Locators.LAST_TWEET_XPATH)).getText();
